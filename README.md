@@ -11,10 +11,14 @@ openclaw-experience/
 ├── brainstorm/         # 头脑风暴技能
 ├── writing-plans/      # 任务规划技能
 ├── workflow-runner/    # 工作流执行技能
-└── doc-writer/        # 文档生成技能
+├── doc-writer/        # 文档生成技能
+├── skill-tools/        # 技能工具
+│   ├── find-skills-usage.md    # Find-Skills 使用指南
+│   └── skill-creator-usage.md  # Skill-Creator 使用指南
+└── mineru-cloud/       # MinerU PDF 解析云端版
 ```
 
-## 技能说明
+## 内容说明
 
 ### reback
 回滚保护系统，用于远程修改配置时的自动回滚保护。
@@ -34,7 +38,15 @@ openclaw-experience/
 ### doc-writer
 文档生成技能，模板化生成各类文档。
 
-## 使用方法
+### skill-tools
+技能工具相关：
+- find-skills-usage.md: 查找和安装技能的使用指南
+- skill-creator-usage.md: 创建自己技能的使用指南
+
+### mineru-cloud
+MinerU 云端 API 技能，用于 PDF 文档智能解析。
+
+## 经验分享机制
 
 当你说"经验分享"时，会自动：
 1. 收集新增的技能和经验
@@ -48,4 +60,5 @@ openclaw-experience/
 - 添加 brainstorm, writing-plans, workflow-runner, doc-writer
 - 添加 reback 回滚保护系统
 - 添加 file-sender 飞书文件发送技能
-
+- 添加 skill-tools (find-skills, skill-creator 使用指南)
+- 添加 mineru-cloud (MinerU 云端 API)
