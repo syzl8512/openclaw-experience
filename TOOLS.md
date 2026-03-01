@@ -13,6 +13,12 @@ Things like:
 - Device nicknames
 - Anything environment-specific
 
+## Web Station部署
+
+- **Web Station目录**: /volume1/@appconf/WebStation/personal_web/
+- **SSH**: synology-wan (ximi.space:2211, 用户syzl8512)
+- **密钥**: ~/.ssh/id_rsa_maintenance
+
 ## Examples
 
 ```markdown
@@ -24,10 +30,20 @@ Things like:
 ### SSH
 
 - **群晖 (DS1821plus)**
-  - 地址：`syzl8512@ximi.space`
+  - 别名：`synology-wan`（定义在 ~/.ssh/config）
+  - 地址：`ximi.space`
   - 端口：2211
-  - 密钥：`~/.ssh/synology_key`
-  - 用途：监控与远程维护
+  - 用户：syzl8512
+  - 密钥：`~/.ssh/id_rsa_maintenance`
+  - 用途：监控与远程维护、Web部署
+  - **重要**：先检查 ~/.ssh/config 获取正确配置
+
+- **软路由 (iStore)**
+  - 地址：`ximi.space`
+  - 端口：9998
+  - 用户：root
+  - 密码：Sy135790@
+  - 用途：Passwall、OpenClash、Docker 管理
 
 ### TTS
 
