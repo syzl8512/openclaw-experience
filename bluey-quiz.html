@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 English Quiz - Bluey - Magic Xylophone</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        
+        .progress {
+            background: #eee;
+            border-radius: 10px;
+            height: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .question {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            background: #f8f9fa;
+            border: 3px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .option:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+            transform: translateY(-2px);
+        }
+        
+        .option.correct {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+        
+        .option.wrong {
+            background: #dc3545;
+            color: white;
+            border-color: #dc3545;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+        }
+        
+        .feedback.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .feedback.wrong {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .next-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .next-btn:hover {
+            transform: scale(1.05);
+        }
+        
+        .result {
+            display: none;
+        }
+        
+        .result.show {
+            display: block;
+        }
+        
+        .score {
+            font-size: 4em;
+            color: #667eea;
+            margin: 20px 0;
+        }
+        
+        .stars {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+        
+        .restart-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        .explanation {
+            font-size: 0.9em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="quiz">
+            <h1>📚 Bluey - Magic Xylophone</h1>
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <div class="question" id="question"></div>
+            <div class="options" id="options"></div>
+            <div class="feedback" id="feedback" style="display:none;"></div>
+            <button class="next-btn" id="nextBtn" style="display:none;" onclick="nextQuestion()">Next ➡️</button>
+        </div>
+        
+        <div class="result" id="result">
+            <h1>🎉 Great Job! 🎉</h1>
+            <div class="stars" id="stars"></div>
+            <div class="score"><span id="score">0</span>/<span id="total">0</span></div>
+            <div class="stats" id="stats"></div>
+            <button class="restart-btn" onclick="restart()">🔄 Try Again</button>
+        </div>
+    </div>
+    
+    <script>
+        const questions = [{"question": "What is the name of the first episode of Bluey?", "options": ["Magic Xylophone", "Hospital", "Keepy Uppy", "Daddy Robot"], "correct": 0, "explanation": "The first episode is called 'Magic Xylophone'."}, {"question": "What game does Bandit play with Bluey at the beginning?", "options": ["Piano", "Xylophone", "Drums", "Guitar"], "correct": 1, "explanation": "Bandit uses Bluey as a pretend xylophone."}, {"question": "What can the magical xylophone do?", "options": ["Make music", "Freeze people in position", "Change colors", "Talk"], "correct": 1, "explanation": "The magical xylophone can freeze people in one position!"}, {"question": "Who wants to have a turn with the xylophone?", "options": ["Bluey", "Bandit", "Bingo", "Muffin"], "correct": 2, "explanation": "Bingo begs to have a turn with the magical xylophone."}, {"question": "What happens when someone is hit by the xylophone?", "options": ["They dance", "They fall asleep", "They freeze in position", "They laugh"], "correct": 2, "explanation": "The xylophone freezes people in whatever position they are in."}, {"question": "Who are the two main characters in this episode?", "options": ["Bluey and Bingo", "Bluey and Bandit", "Bingo and Chilli", "Bluey and Muffin"], "correct": 0, "explanation": "Bluey and Bingo are the two main characters."}, {"question": "What lesson does Bluey learn in this episode?", "options": ["To share", "To be quiet", "To sleep early", "To eat vegetables"], "correct": 0, "explanation": "Bluey learns the importance of sharing and taking turns."}, {"question": "What color is Bluey?", "options": ["Red", "Blue", "Brown", "White"], "correct": 1, "explanation": "Bluey is a Blue Heeler, so she is blue."}, {"question": "Who is Bingo?", "options": ["Bluey's brother", "Bluey's sister", "Bluey's friend", "Bluey's cousin"], "correct": 1, "explanation": "Bingo is Bluey's younger sister."}, {"question": "What happens when Bingo is frozen by the xylophone?", "options": ["She cries", "She stays still", "She runs away", "She disappears"], "correct": 1, "explanation": "Bingo stays frozen in one position until someone helps her."}, {"question": "What do Bluey and Bingo call the magical object?", "options": ["Magic Piano", "Magic Xylophone", "Magic Drums", "Magic Flute"], "correct": 1, "explanation": "They call it the Magic Xylophone."}, {"question": "Why does Bingo get upset?", "options": ["She is hungry", "Bluey won't share the xylophone", "She is tired", "She lost her toy"], "correct": 1, "explanation": "Bingo gets upset because Bluey is not sharing the toy with her."}, {"question": "What is the name of Bluey's dad?", "options": ["Bandit", "Charlie", "Pat", "Lucky"], "correct": 0, "explanation": "Bluey's dad is named Bandit."}, {"question": "How many times can the xylophone freeze someone?", "options": ["Once", "Twice", "Three times", "Many times"], "correct": 3, "explanation": "The xylophone can freeze people many times throughout the game."}, {"question": "What game do the kids play with the xylophone?", "options": ["Hide and seek", "Tag", "Freeze game", "Simon says"], "correct": 2, "explanation": "They play a freeze game where the xylophone freezes people."}, {"question": "Where do Bluey and Bingo find the xylophone?", "options": ["In the kitchen", "In the playroom", "In the garden", "Under the bed"], "correct": 1, "explanation": "They find the magical xylophone in their playroom."}, {"question": "What does Bandit pretend to be while playing?", "options": ["A robot", "A piano player", "A teacher", "A doctor"], "correct": 1, "explanation": "Bandit pretends to be the player of the human xylophone."}, {"question": "What is the main message of this episode?", "options": ["Playing video games is fun", "Taking turns is important", "Going to bed early is good", "Eating vegetables is healthy"], "correct": 1, "explanation": "The main message is about learning to take turns and share."}, {"question": "What happens at the end of the episode?", "options": ["They watch TV", "They go to bed", "They learn to share", "They go outside"], "correct": 2, "explanation": "At the end, they learn to share and take turns."}, {"question": "What type of animal is Bluey?", "options": ["Cat", "Dog", "Rabbit", "Bear"], "correct": 1, "explanation": "Bluey is a dog, specifically a Blue Heeler (Australian Cattle Dog)."}];
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+        
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('question').textContent = q.question;
+            document.getElementById('progressBar').style.width = ((currentQuestion + 1) / questions.length * 100) + '%';
+            
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            
+            q.options.forEach((opt, i) => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(i);
+                optionsDiv.appendChild(btn);
+            });
+            
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+        
+        function selectOption(index) {
+            const q = questions[currentQuestion];
+            const options = document.querySelectorAll('.option');
+            const feedback = document.getElementById('feedback');
+            
+            answers.push({
+                question: q.question,
+                selected: index,
+                correct: q.correct,
+                correctAnswer: q.options[q.correct]
+            });
+            
+            if (index === q.correct) {
+                options[index].classList.add('correct');
+                feedback.className = 'feedback correct';
+                feedback.innerHTML = '✅ Correct! ' + (q.explanation || '');
+                score++;
+            } else {
+                options[index].classList.add('wrong');
+                options[q.correct].classList.add('correct');
+                feedback.className = 'feedback wrong';
+                feedback.innerHTML = '❌ The correct answer is: ' + q.options[q.correct];
+            }
+            
+            feedback.style.display = 'block';
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            
+            // Disable all options
+            options.forEach(opt => opt.style.pointerEvents = 'none');
+        }
+        
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+        
+        function showResult() {
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('result').classList.add('show');
+            document.getElementById('score').textContent = score;
+            document.getElementById('total').textContent = questions.length;
+            
+            // Stars
+            const percentage = score / questions.length;
+            let stars = '⭐';
+            if (percentage >= 0.8) stars = '⭐⭐⭐⭐⭐';
+            else if (percentage >= 0.6) stars = '⭐⭐⭐⭐';
+            else if (percentage >= 0.4) stars = '⭐⭐⭐';
+            else if (percentage >= 0.2) stars = '⭐⭐';
+            document.getElementById('stars').textContent = stars;
+            
+            // Stats
+            let statsHtml = '';
+            answers.forEach((a, i) => {
+                const status = a.selected === a.correct ? '✅' : '❌';
+                statsHtml += f'<div class="stat-item"><span>Q{i+1}</span><span>{status}</span></div>';
+            });
+            document.getElementById('stats').innerHTML = statsHtml;
+        }
+        
+        function restart() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            document.getElementById('quiz').style.display = 'block';
+            document.getElementById('result').classList.remove('show');
+            showQuestion();
+        }
+        
+        // Start
+        showQuestion();
+    </script>
+</body>
+</html>
