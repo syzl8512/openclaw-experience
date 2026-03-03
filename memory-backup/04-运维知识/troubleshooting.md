@@ -41,3 +41,9 @@
 - 手动删除 `openclaw.json` 中 `retrieval` 部分的冗余字段。
 - 运行 `openclaw doctor` 验证配置通过。
 - 运行 `openclaw gateway restart` 恢复服务。
+
+---
+
+## 同步时间
+
+- 同步时间：2026-03-04 00:00 (Asia/Shanghai)
