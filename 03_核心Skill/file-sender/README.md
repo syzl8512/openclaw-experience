@@ -1,0 +1,115 @@
+# 飞书文件发送技术方案
+
+## 1. 技术方案
+
+使用 OpenClaw CLI 的 message send 命令，通过 --media 参数发送文件。
+
+命令格式：
+openclaw message send --channel feishu --target "用户ID" --media "文件路径" --message "消息内容"
+
+底层原理：调用飞书 im/v1/files API 上传文件，然后发送消息。
+
+## 2. 完整示例代码
+
+### Node.js 版本
+
+const fs = require('fs');
+const FormData = require('form-data');
+
+async function sendFileFeishu(filePath, userId) {
+  // 第一步：获取 tenant_access_token
+  const tokenResp = await fetch('https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      app_id: 'cli_xxxxxxxx',
+      app_secret: 'xxxxxxxxxxxxxxxx'
+    })
+  });
+  const tokenData = await tokenResp.json();
+  const accessToken = tokenData.tenant_access_token;
+
+  // 第二步：上传文件
+  const form = new FormData();
+  form.append('file', fs.createReadStream(filePath));
+  form.append('file_name', 'report.pdf');
+  form.append('file_type', 'pdf');
+
+  const uploadResp = await fetch('https://open.feishu.cn/open-apis/im/v1/files', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + accessToken, ...form.getHeaders() },
+    body: form
+  });
+  const uploadData = await uploadResp.json();
+  const fileKey = uploadData.data.file_key;
+
+  // 第三步：发送消息
+  const messageResp = await fetch('https://open.feishu.cn/open-apis/im/v1/messages/' + userId + '/reply', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      msg_type: 'file',
+      content: JSON.stringify({ file_key: fileKey })
+    })
+  });
+  
+  return messageResp.json();
+}
+
+sendFileFeishu('/path/to/report.pdf', 'ou_xxxxxxxx');
+
+### Python 版本
+
+import requests
+import json
+
+def send_file_feishu(file_path, user_id):
+    # 第一步：获取 token
+    token_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
+    token_data = {
+        "app_id": "cli_xxxxxxxx",
+        "app_secret": "xxxxxxxxxxxxxxxx"
+    }
+    resp = requests.post(token_url, json=token_data)
+    access_token = resp.json()["tenant_access_token"]
+    
+    # 第二步：上传文件
+    upload_url = "https://open.feishu.cn/open-apis/im/v1/files"
+    headers = {"Authorization": "Bearer " + access_token}
+    
+    with open(file_path, 'rb') as f:
+        files = {'file': ('report.pdf', f, 'application/pdf'), 'file_name': 'report.pdf', 'file_type': 'pdf'}
+        resp = requests.post(upload_url, files=files, headers=headers)
+        file_key = resp.json()["data"]["file_key"]
+    
+    # 第三步：发送消息
+    message_url = "https://open.feishu.cn/open-apis/im/v1/messages/" + user_id + "/reply"
+    message_data = {"msg_type": "file", "content": json.dumps({"file_key": file_key})}
+    resp = requests.post(message_url, json=message_data, headers=headers)
+    return resp.json()
+
+send_file_feishu('/path/to/report.pdf', 'ou_xxxxxxxx')
+
+## 3. 需要的权限
+
+飞书应用需要开启以下权限：
+- im:message:send_as_bot - 发送消息
+- im:resource - 上传图片和文件
+- im:message:reply - 回复消息
+
+关于 user_id：发送消息需要指定 receive_id_type 参数。
+
+## 4. 常见问题
+
+问题1：文件不在白名单
+OpenClaw 只能发送白名单目录的文件。
+
+问题2：权限不足
+确保应用有 im:resource 权限。
+
+问题3：token 过期
+tenant_access_token 有效期2小时。
+

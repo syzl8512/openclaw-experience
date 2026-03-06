@@ -1,24 +1,43 @@
-# Claude Code 自定义命令集合
+# OpenClaw 经验分享仓库
 
-## Claude Code Custom Commands Collection
-
-本仓库收录了在 Claude Code 中使用的自定义命令，用于提升工作效率和自动化工作流程。
-
-This repository contains custom commands for Claude Code, designed to improve work efficiency and automate workflows.
+> 本仓库用于存放 OpenClaw 的所有经验、技巧和技能，供多个 Agent 学习同步。
 
 ---
 
-## 目录 | Directory
+## 📁 目录结构
 
-### claude-commands 自定义命令
-
-| 命令文件 | 功能描述 | Function |
-|---------|---------|----------|
-| ppt制作.md | 智能PPT生成助手，支持逐字稿生成和PPT调整 | AI PPT Generator |
+| 编号 | 目录 | 说明 |
+|------|------|------|
+| 一 | [01_基础配置](./01_基础配置/) | 记忆模式、安装技巧、数据库要求 |
+| 二 | [02_运维保障](./02_运维保障/) | 运维知识、故障处理、系统监控 |
+| 三 | [03_核心Skill](./03_核心Skill/) | 100+ Skills 技能包 |
+| 四 | [04_MCP工具](./04_MCP工具/) | MCP 服务器配置和集成（待建设） |
+| 五 | [05_自动化流程](./05_自动化流程/) | 项目文档、脚本、自动化工作流 |
+| 六 | [06_飞书集成](./06_飞书集成/) | 飞书文档、网盘、知识库集成 |
+| 七 | [07_创作工具](./07_创作工具/) | 书籍创作、PPT、Excel 等创作技能 |
+| 八 | [08_学习资源](./08_学习资源/) | 教程、参考资料（待建设） |
 
 ---
 
-## 使用说明 | Usage
+## 📋 核心文件
+
+| 文件 | 用途 |
+|------|------|
+| `todo.md` | 多 Agent 任务同步列表 |
+| `memory/` | 当前运行记忆 |
+| `backup.log` | 备份日志 |
+
+---
+
+## Claude Code 自定义命令
+
+本仓库包含 Claude Code 中使用的自定义命令，用于提升工作效率和自动化工作流程。
+
+### claude-commands 目录
+
+| 命令文件 | 功能描述 |
+|---------|---------|
+| `claude-commands/ppt制作.md` | 智能PPT生成助手，支持逐字稿生成和PPT调整 |
 
 ### 安装方式
 
@@ -35,56 +54,43 @@ cp claude-commands/ppt制作.md ~/.claude/commands/
 
 ---
 
-## ppt制作 命令详解
+## 🔧 主要 Skill 分类
 
-### 功能概述
+### 文档处理
+- `markdown-converter` - 文档格式转换
+- `mineru` / `mineru-cloud` - PDF 解析
+- `pptx-2` - PPT 制作
+- `excel-xlsx` - Excel 处理
+- `word-docx` - Word 处理
 
-智能PPT生成助手，基于逐字稿或参考PPT自动生成乔布斯风格的高质量演示文稿。
+### 飞书集成
+- `feishu-doc` - 飞书文档
+- `feishu-drive` - 飞书网盘
+- `feishu-wiki` - 飞书知识库
 
-AI PPT Generator - Automatically generates high-quality乔布斯-style presentations from manuscripts or reference PPTs.
+### AI 能力
+- `tavily-search` - 网络搜索
+- `supabase` - 数据库
+- `self-evolve` - 自进化
+- `book-adventure-writer` - 儿童书籍创作
 
-### 使用方式
-
-#### 方式一：基于逐字稿生成
-
-```
-/ppt制作
-[附上逐字稿内容]
-[汇报对象：xxx]
-```
-
-#### 方式二：基于参考PPT调整
-
-```
-/ppt制作
-请调整这个PPT
-[汇报对象：xxx]
-[附上PPT文件]
-```
-
-### 技术规范
-
-- 格式：单个HTML文件
-- 技术栈：Vue 3 + TailwindCSS
-- 比例：9:16 竖屏
-- 效果：深色渐变底色 + 模糊浮动光斑 + 动画
+### 运维
+- `openclaw-ops` - 运维知识
+- `reback` - 回滚保护
 
 ---
 
-## 贡献指南 | Contributing
+## 📝 更新日志
 
-欢迎提交 Issue 和 Pull Request！
-
-Issues and Pull Requests are welcome!
-
----
-
-## 许可证 | License
-
-MIT License
+- **2026-03-06**: 全新八大分类结构上线
+- 持续更新中...
 
 ---
 
-## 联系方式 | Contact
+*本仓库供 OpenClaw Agent 学习使用*
 
-GitHub: https://github.com/syzl8512/openclaw-experience
+---
+
+## English Version
+
+See [README_EN.md](./README_EN.md) for English documentation.
