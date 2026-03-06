@@ -1,30 +1,65 @@
-# OpenClaw 经验技能库
+# OpenClaw 经验分享仓库
 
-链接: https://github.com/syzl8512/openclaw-experience
+> 本仓库用于存放 OpenClaw 的所有经验、技巧和技能，供多个 Agent 学习同步。
 
-## Skills
+---
 
-| Skill | 位置 |
-|-------|------|
-| 飞书文件发送 | feishu-file-manager/ |
-| AI搜索 | tavily-search/ |
-| NotebookLM | notebooklm-cli/ |
-| 运维 | openclaw-ops/ |
-| 记忆系统 | 记忆系统/ |
-| 英语Quiz | english-quiz-generator/ |
-| 头脑风暴 | brainstorm/ |
-| 任务规划 | writing-plans/ |
-| 工作流 | workflow-runner/ |
-| 文档生成 | doc-writer/ |
-| 回滚保护 | reback/ |
+## 📁 目录结构
 
-## 工具
+| 编号 | 目录 | 说明 |
+|------|------|------|
+| 一 | [01_基础配置](./01_基础配置/) | 记忆模式、安装技巧、数据库要求 |
+| 二 | [02_运维保障](./02_运维保障/) | 运维知识、故障处理、系统监控 |
+| 三 | [03_核心Skill](./03_核心Skill/) | 100+ Skills 技能包 |
+| 四 | [04_MCP工具](./04_MCP工具/) | MCP 服务器配置和集成（待建设） |
+| 五 | [05_自动化流程](./05_自动化流程/) | 项目文档、脚本、自动化工作流 |
+| 六 | [06_飞书集成](./06_飞书集成/) | 飞书文档、网盘、知识库集成 |
+| 七 | [07_创作工具](./07_创作工具/) | 书籍创作、PPT、Excel 等创作技能 |
+| 八 | [08_学习资源](./08_学习资源/) | 教程、参考资料（待建设） |
 
-| 工具 | 位置 |
-|-----|------|
-| Find-Skills | skill-tools/find-skills-usage.md |
-| Skill-Creator | skill-tools/skill-creator-usage.md |
+---
 
-## Laws
+## 📋 核心文件
 
-经验铁律: laws/
+| 文件 | 用途 |
+|------|------|
+| `todo.md` | 多 Agent 任务同步列表 |
+| `memory/` | 当前运行记忆 |
+| `backup.log` | 备份日志 |
+
+---
+
+## 🔧 主要 Skill 分类
+
+### 文档处理
+- `markdown-converter` - 文档格式转换
+- `mineru` / `mineru-cloud` - PDF 解析
+- `pptx-2` - PPT 制作
+- `excel-xlsx` - Excel 处理
+- `word-docx` - Word 处理
+
+### 飞书集成
+- `feishu-doc` - 飞书文档
+- `feishu-drive` - 飞书网盘
+- `feishu-wiki` - 飞书知识库
+
+### AI 能力
+- `tavily-search` - 网络搜索
+- `supabase` - 数据库
+- `self-evolve` - 自进化
+- `book-adventure-writer` - 儿童书籍创作
+
+### 运维
+- `openclaw-ops` - 运维知识
+- `reback` - 回滚保护
+
+---
+
+## 📝 更新日志
+
+- **2026-03-06**: 全新八大分类结构上线
+- 持续更新中...
+
+---
+
+*本仓库供 OpenClaw Agent 学习使用*
