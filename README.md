@@ -39,6 +39,12 @@
 |---------|---------|
 | `claude-commands/ppt制作.md` | 智能PPT生成助手，支持逐字稿生成和PPT调整 |
 
+### skills 目录
+
+| Skill文件 | 功能描述 |
+|-----------|---------|
+| `skills/ppt-generator/SKILL.md` | PPT生成规范（乔布斯风格标题、颜色系、字体规范） |
+
 ### 安装方式
 
 1. 克隆仓库到本地
@@ -50,6 +56,7 @@ git clone https://github.com/syzl8512/openclaw-experience.git
 ```bash
 # macOS
 cp claude-commands/ppt制作.md ~/.claude/commands/
+cp -r skills/ ~/.claude/skills/
 ```
 
 ---

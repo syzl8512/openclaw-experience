@@ -14,7 +14,7 @@
 
 ## 引用Skill
 
-**必须引用** `/Users/zhangliang/Documents/GitHub/mia_vault/.claude/skills/ppt-generator/SKILL.md` 中的所有规范
+**必须引用** `skills/ppt-generator/SKILL.md` 中的所有规范
 
 ---
 
@@ -54,7 +54,7 @@
 
 根据使用方式分别处理：
 - **逐字稿**：完整接收用户提供的文字内容
-- **参考PPT**：使用 `pptx-reverse-analysis.md` 分析现有PPT结构
+- **参考PPT**：使用 `claude-commands/PPT样本分析.md` 分析现有PPT结构
 
 ### Step 2: 分析输入内容
 
@@ -65,11 +65,11 @@
 4. 识别数据、时间节点、关键词
 
 **参考PPT分析：**
-调用 `/Users/zhangliang/Documents/GitHub/mia_vault/.claude/commands/PPT样本分析.md` 命令进行深度分析
+调用 `claude-commands/PPT样本分析.md` 命令进行深度分析
 
 ### Step 3: 生成乔布斯式标题
 
-遵循 `/Users/zhangliang/Documents/GitHub/mia_vault/.claude/skills/ppt-generator/SKILL.md` 中的标题生成规则：
+遵循 `skills/ppt-generator/SKILL.md` 中的标题生成规则：
 
 | 类型 | 公式 | 示例 |
 |------|------|------|
@@ -94,7 +94,7 @@
 
 使用 Vue 3 + TailwindCSS 语法，生成HTML格式PPT：
 
-**技术规范（来自 `/Users/zhangliang/Documents/GitHub/mia_vault/.claude/skills/ppt-generator/SKILL.md`）：**
+**技术规范（来自 `skills/ppt-generator/SKILL.md`）：**
 - 格式：单个HTML文件
 - 技术栈：Vue 3 + TailwindCSS
 - 比例：9:16 竖屏
@@ -178,8 +178,8 @@
 
 | 类型 | 名称 | 用途 |
 |------|------|------|
-| Skill | `/Users/zhangliang/Documents/GitHub/mia_vault/.claude/skills/ppt-generator/SKILL.md` | PPT生成规范（标题、颜色、字体） |
-| Command | `/Users/zhangliang/Documents/GitHub/mia_vault/.claude/commands/PPT样本分析.md` | 参考PPT的深度分析 |
+| Skill | `skills/ppt-generator/SKILL.md` | PPT生成规范（标题、颜色、字体） |
+| Command | `claude-commands/PPT样本分析.md` | 参考PPT的深度分析 |
 | MCP | `mcp__chrome-devtools__*` | 网页PPT截图（如需要） |
 
 ---
@@ -188,10 +188,6 @@
 
 - **格式**：单个HTML文件
 - **页数**：最少30页，内容充实
-- **保存位置**：
-  - PPT文件：`/Users/zhangliang/Documents/GitHub/mia_vault/02_工作/汇报材料/`
-  - 附件：`/Users/zhangliang/Documents/GitHub/mia_vault/attachments/`
-  - 逐字稿备份：`/Users/zhangliang/Documents/GitHub/mia_vault/02_工作/素材库/逐字稿/`
 
 ---
 
@@ -207,9 +203,6 @@ AI：好的，我将：
 2. 生成乔布斯式标题
 3. 适配鄂钢办公室汇报场景
 4. 生成30+页高质量PPT
-
-[处理完成后]
-PPT已生成：`/Users/zhangliang/Downloads/ppt-言出法随_AI工作体系_鄂钢.html`
 ```
 
 ### 示例2：基于参考PPT调整
